@@ -10,7 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { lightBlue, blueGrey } from "@mui/material/colors";
 const Multiclassifier = () => {
   return (
-    <Box component="main" px={{ xs: 4, md: 8 }}>
+    <Box component="main" px={{ xs: 3, md: 7 }}>
       <Typography
         component="h1"
         fontWeight="bold"
@@ -53,235 +53,313 @@ const Multiclassifier = () => {
       </Typography>
       {/* Parameters */}
 
-      <section>
-        <div>
-          <Typography
-            component="h2"
-            p={3}
-            fontWeight="bold"
-            fontSize="1.3rem"
-            // bgcolor={lightBlue[500]}
-            // bgcolor={blueGrey[50]}
+      <Box component="section">
+        <Typography component="h2" p={3} fontWeight="bold" fontSize="1.3rem">
+          Parameters
+        </Typography>
+        {/* The column */}
+        <Accordion disableGutters square={false}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            Parameters
-          </Typography>
-          {/* The column */}
-          <Accordion disableGutters square={false}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography component="span" fontWeight="bold">
-                cores: int, default=-1
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                This parameter is used to specify how many concurrent processes
-                or threads should be used for routines that are parallelized
-                with joblib. <br /> If set to -1, all CPUs are used. <br />
-                If less than-1, (n_cpus + 1 + n_jobs) e.g. -2 means all CPU’s
-                but one are used. The value for cores is set on all classifiers
-                with the n_jobs parameter. <br /> See the{" "}
-                <a href="https://scikit-learn.org/stable/glossary.html#term-n_jobs">
-                  scikit-learn documentation for more.
-                </a>
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+            <Typography component="span" fontSize="1.1rem">
+              cores: int, default=-1
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              This parameter is used to specify how many concurrent processes or
+              threads should be used for routines that are parallelized with
+              joblib. <br /> If set to -1, all CPUs are used. <br />
+              If less than-1, (n_cpus + 1 + n_jobs) e.g. -2 means all CPU’s but
+              one are used. The value for cores is set on all classifiers with
+              the n_jobs parameter. <br /> See the{" "}
+              <a href="https://scikit-learn.org/stable/glossary.html#term-n_jobs">
+                scikit-learn documentation for more.
+              </a>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-          <Accordion disableGutters>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-            >
-              <Typography component="span" fontWeight="bold">
-                random_state: int, default=randint(1000)
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Unless specified, a random number between 0 and 1000 is set on
-                the random_state parameter on all estimators in the
-                MultiClassifier. <br /> See the{" "}
-                <a href="https://scikit-learn.org/stable/glossary.html#term-random_state">
-                  scikit-learn documentation for more.
-                </a>
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+        <Accordion disableGutters>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography component="span" fontSize="1.1rem">
+              random_state: int, default=randint(1000)
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Unless specified, a random number between 0 and 1000 is set on the
+              random_state parameter on all estimators in the MultiClassifier.{" "}
+              <br /> See the{" "}
+              <a href="https://scikit-learn.org/stable/glossary.html#term-random_state">
+                scikit-learn documentation for more.
+              </a>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-          <Accordion disableGutters>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3a-content"
-              id="panel3a-header"
-            >
-              <Typography component="span" fontWeight="bold">
-                verbose: bool, default = False
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                If verbose is set to True, when the fit function is called, the
-                name of the estimator currently being fitted on the training set
-                is displayed in your notebook.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+        <Accordion disableGutters>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3a-content"
+            id="panel3a-header"
+          >
+            <Typography component="span" fontSize="1.1rem">
+              verbose: bool, default = False
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              If verbose is set to True, when the fit function is called, the
+              name of the estimator currently being fitted on the training set
+              is displayed in your notebook.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-          <Accordion disableGutters>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel4a-content"
-              id="panel4a-header"
-            >
-              <Typography component="span" fontWeight="bold">
-                target_class: ['binary', ‘multiclass'] , default = 'binary'
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                This indicates the type of classification problem you're trying
-                to solve. If multiclass, set to 'multiclass' to avoid throwing
-                an error as multiclass training is slightly different from
-                binary.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+        <Accordion disableGutters>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel4a-content"
+            id="panel4a-header"
+          >
+            <Typography component="span" fontSize="1.1rem">
+              target_class: ['binary', ‘multiclass'] , default = 'binary'
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              This indicates the type of classification problem you're trying to
+              solve. If multiclass, set to 'multiclass' to avoid throwing an
+              error as multiclass training is slightly different from binary.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-          <Accordion disableGutters>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel5a-content"
-              id="panel5a-header"
-            >
-              <Typography component="span" fontWeight="bold">
-                imbalanced: bool, default = False
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Set to True if you’re working with an imbalanced classification
-                dataset.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+        <Accordion disableGutters>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel5a-content"
+            id="panel5a-header"
+          >
+            <Typography component="span" fontSize="1.1rem">
+              imbalanced: bool, default = False
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Set to True if you’re working with an imbalanced classification
+              dataset.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-          <Accordion disableGutters square={false}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel6a-content"
-              id="panel6a-header"
-            >
-              <Typography component="span" fontWeight="bold">
-                strategy: str, default = None
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography component="div">
-                Set your desired sampling strategy, whether oversampling,
-                undersampling, or over and undersampling.
-                <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
-                  from MultiTrain import MultiClassifier
-                  <br /> train = MultiClassifier() <br /> train.strategies()
-                </Box>
-                Use the above code example to view a list of the different
-                strategies you can set to this parameter. This parameter can
-                only be used when imbalanced is set to True.
-                <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
-                  from MultiTrain import MultiClassifier
-                  <br /> train = MultiClassifier(cores=-1, random_state = 42,
-                  verbose = True, target_class='binary', imbalanced=True,
-                  strategy='SMOTE')
-                </Box>
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        </div>
-      </section>
+        <Accordion disableGutters square={false}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel6a-content"
+            id="panel6a-header"
+          >
+            <Typography component="span" fontSize="1.1rem">
+              strategy: str, default = None
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography component="div">
+              Set your desired sampling strategy, whether oversampling,
+              undersampling, or over and undersampling.
+              <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
+                from MultiTrain import MultiClassifier
+                <br /> train = MultiClassifier() <br /> train.strategies()
+              </Box>
+              Use the above code example to view a list of the different
+              strategies you can set to this parameter. This parameter can only
+              be used when imbalanced is set to True.
+              <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
+                from MultiTrain import MultiClassifier
+                <br /> train = MultiClassifier(cores=-1, random_state = 42,
+                verbose = True, target_class='binary', imbalanced=True,
+                strategy='SMOTE')
+              </Box>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </Box>
       {/* End of Parameters */}
 
       {/* Drop down */}
-      <section>
-        <p>
-          The evaluation metrics available when using
-          <i>sklearn.model_selection.train_test_split</i>
-          or the
-          <i>MultiClassifier split</i>
-          function are:{" "}
-        </p>
+      <Box component="section" mt={2}>
+        <Typography fontSize="1.1rem">
+          The evaluation metrics available when using{" "}
+          <i>sklearn.model_selection.train_test_split</i> or the{" "}
+          <i>MultiClassifier split</i> function are:
+        </Typography>
         <ul>
           <li>
-            Binary Classification = ["Accuracy", "r2 score", "ROC AUC", "f1
-            score", "Precision", "Recall"]
+            Binary Classification:
+            <ol style={{ fontSize: "0.9em" }}>
+              <li>Accuracy</li>
+              <li>r2 score</li>
+              <li>ROC AUC</li>
+              <li>f1 score</li>
+              <li>Precision</li>
+              <li>Recall</li>
+            </ol>
           </li>
-          <li>Muticlass Classification = ["Accuracy", "r2 score"]</li>
+          <li>
+            Muticlass Classification:
+            <ol style={{ fontSize: "0.9em" }}>
+              <li>Accuracy</li>
+              <li>r2 score</li>
+            </ol>
+          </li>
         </ul>
         <div>
           <p>The evaluation metrics available when kf is set to True are:</p>
-          <p>
-            <span>
-              If target_class == ‘binary’ and show_train_score is False:
-              ["Accuracy",
-            </span>
-            ”Balanced Accuracy”, "Precision", "Recall", "f1", "r2", "Standard
-            Deviation of Accuracy"]
-          </p>
-          <p>
-            <span>
-              If target_class == ‘binary’ and show_train_score is True:
-            </span>
-            ["Accuracy(Train)", "Accuracy", ”Balanced Accuracy(Train)”,
-            “Balanced Accuracy”, "Precision(Train)", "Precision",
-            "Recall(Train)", "Recall", "f1(Train)", "f1", ”r2”, "Standard
-            Deviation of Accuracy(Train)", "Standard Deviation of Accuracy"]
-          </p>
-          <p>
-            <span>
-              If target_class == "multiclass" and show_train_score is False:
-            </span>
-            ["Precision Macro", "Recall Macro", "f1 Macro"]
-          </p>
-          <p>
-            <span>
-              If target_class == “multiclass” and show_train_score is True:
-            </span>
-            ["Precision Macro(Train)", "Precision Macro", "Recall Macro(Train)",
-            "Recall Macro", "f1 Macro(Train)", "f1 Macro", "Time Taken(s)"]
-          </p>
-          <p>
-            The evaluation metrics available when t_split is set to True are:
-          </p>
-          <p>
-            <span>
-              If target_class == ‘binary’ and show_train_score is True:
-            </span>
-            ["Accuracy(Train)", "Accuracy", "Balanced Accuracy(Train)","Balanced
-            Accuracy", "r2 score(Train)", "r2 score", "ROC AUC(Train)", "ROC
-            AUC", "f1 score(Train)", "f1 score","Precision(Train)", "Precision",
-            "Recall(Train)", "Recall", "execution time(seconds)"]
-          </p>
-          <p>
-            <span>
-              If target_class == “binary” and show_train_score is False:
-            </span>
-            ["Accuracy", "Balanced Accuracy", "r2 score", "ROC AUC", "f1 score",
-            "Precision", "Recall", "execution time(seconds)"]
-          </p>
-          <p>
-            <span>
-              If target_class == “multiclass” and show_train score is True:
-            </span>
-            ["Overfitting", "Accuracy(Train)", "Accuracy", "Balanced
-            Accuracy(Train)", "Balanced Accuracy", "r2 score(Train)", "r2
-            score", "f1 score(Train)", "f1 score", "Precision(Train)",
-            "Precision", "Recall(Train)", "Recall", "execution time(seconds)"]
-          </p>
+          <ul>
+            <li>
+              If target_class == ‘binary’:
+              <ul>
+                <li>
+                  show_train_score is False:
+                  <ol>
+                    <li>Accuracy</li>
+                    <li>Balanced Accuracy</li>
+                    <li>Precision</li>
+                    <li>Recall</li>
+                    <li>f1</li>
+                    <li>r2</li>
+                    <li>Standard Deviation of Accuracy</li>
+                  </ol>
+                </li>
+
+                <li>
+                  show_train_score is True:
+                  <ol>
+                    <li>Accuracy(Train)</li>
+                    <li>Accuracy</li>
+                    <li>Balanced Accuracy(Train)</li>
+                    <li>Precision(Train)</li>
+                    <li>Precision</li>
+                    <li>Recall(Train)</li>
+                    <li>Recall</li>
+                    <li>f1(Train)</li>
+                    <li>f1</li>
+                    <li>r2</li>
+                    <li>Standard Deviation of Accuracy(Train)</li>
+                    <li>Standard Deviation of Accuracy</li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+            <br />
+            <li>
+              If target_class == ‘multiclass’:
+              <ul>
+                <li>
+                  show_train_score is False:
+                  <ol>
+                    <li>Precision Macro</li>
+                    <li>Recall Macro</li>
+                    <li>Balanced Accuracy</li>
+                    <li>f1 Macro</li>
+                  </ol>
+                </li>
+
+                <li>
+                  show_train_score is True:
+                  <ol>
+                    <li>Precision Macro(Train)</li>
+                    <li>Precision Macro</li>
+                    <li>Recall Macro(Train)</li>
+                    <li>Recall Macro</li>
+                    <li>f1 Macro(Train)</li>
+                    <li>f1 Macro</li>
+                    <li>Time Taken(s)</li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          {/* t_split */}
+          <ul>
+            <p>
+              The evaluation metrics available when t_split is set to True are:
+            </p>
+            <li>
+              If target_class == ‘binary’:
+              <ul>
+                <li>
+                  show_train_score is True:
+                  <ol>
+                    <li>Accuracy(Train)</li>
+                    <li>Accuracy</li>
+                    <li>Balanced Accuracy(Train)</li>
+                    <li>Balanced Accuracy</li>
+                    <li>r2 score(Train)</li>
+                    <li>r2 score</li>
+                    <li>ROC AUC(Train)</li>
+                    <li>ROC AUC</li>
+                    <li>f1 score(Train)</li>
+                    <li>f1 score</li>
+                    <li>Precision(Train)</li>
+                    <li>Precision</li>
+                    <li>Recall(Train)</li>
+                    <li>Recall</li>
+                    <li>execution time(seconds)</li>
+                  </ol>
+                </li>
+
+                <li>
+                  show_train_score is False:
+                  <ol>
+                    <li>Accuracy</li>
+                    <li>Balanced Accuracy</li>
+                    <li>r2 score</li> <li>ROC AUC</li>
+                    <li>f1 score</li>
+                    <li>Precision</li>
+                    <li>Recall</li>
+                    <li>execution time(seconds)</li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+            <br />
+            <li>
+              If target_class == ‘multiclass’:
+              <ul>
+                <li>
+                  show_train_score is True:
+                  <ol>
+                    <li>Overfitting</li>
+                    <li>Accuracy(Train)</li>
+                    <li>Accuracy</li>
+                    <li>Balanced Accuracy(Train)</li>
+                    <li>Balanced Accuracy</li>
+                    <li>r2 score(Train)</li>
+                    <li>r2 score</li>
+                    <li>f1 score(Train)</li>
+                    <li>f1 score</li>
+                    <li>Precision (Train)</li>
+                    <li>Precision </li>
+                    <li>Recall (Train)</li>
+                    <li>Recall </li>
+                    <li>execution time(seconds)</li>
+                  </ol>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </section>
+      </Box>
       {/* End of Drop down */}
       {/* Methods */}
       <section>
@@ -360,7 +438,7 @@ const Multiclassifier = () => {
           </ul>
         </div>
         <div>
-          <h3>Fit()</h3>
+          <h3>fit()</h3>
           <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
             Fit = fit(X, y, self_split , X_train, X_test, y_train, ,y_test,
             split_self = False, split_data, splitting = False, kf = False, fold
