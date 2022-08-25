@@ -297,12 +297,16 @@ const Multiclassifier = () => {
         </Typography>
         <div>
           <h3>split()</h3>
-          from sklearn import datasets <br /> from MultiTrain import
-          MultiClassifier <br /> df = datasets.load_boston() <br /> features,
-          labels = boston.data, boston.target <br /> train = MultiClassifier()
-          <br /> split = train.split(X = features, y = labels, sizeOfTest=0.2,
-          randomState=45, strat=False, dimensionalit_reduction = False,
-          normalize = any, n_component, columns_scale, shuffle_data=True)
+
+          <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
+            from sklearn import datasets <br /> from MultiTrain import
+            MultiClassifier <br /> df = datasets.load_boston() <br /> features,
+            labels = boston.data, boston.target <br /> train = MultiClassifier()
+            <br /> split = train.split(X = features, y = labels, sizeOfTest=0.2,
+            randomState=45, strat=False, dimensionalit_reduction = False,
+            normalize = any, n_component, columns_scale, shuffle_data=True)
+          </Box>
+
           <p>
             This metric splits the data into X_train, y_train, X_test, and
             y_test.{" "}
@@ -357,13 +361,13 @@ const Multiclassifier = () => {
         </div>
         <div>
           <h3>Fit()</h3>
-          <p>
+          <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
             Fit = fit(X, y, self_split , X_train, X_test, y_train, ,y_test,
             split_self = False, split_data, splitting = False, kf = False, fold
             = int, excel = False, return_best_model, return_fastest_model =
             False, show_train_score = False, text = False, vectorize, ngrams =
             tuple, sort)
-          </p>
+          </Box>
           <h4>PARAMETERS</h4>
           <ul>
             <li>
