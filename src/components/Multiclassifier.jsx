@@ -7,66 +7,59 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { lightBlue, blueGrey } from "@mui/material/colors";
+
 const Multiclassifier = () => {
   return (
-    <Box component="main" px={{ xs: 3, md: 7 }}>
-      <Typography
-        component="h1"
-        fontWeight="bold"
-        fontSize="2rem"
-        textAlign="center"
-        my={2}
-        py={3}
-        bgcolor={lightBlue[50]}
-        sx={{
-          borderTopRightRadius: 32,
-          borderBottomLeftRadius: 32,
-        }}
-      >
-        Multiclassifier
+    <Box component="main" px={{ xs: 3, md: 7 }} mt={{ xs: "5rem", md: "6rem" }}>
+      <Typography component="h1" variant="h1" my={2}>
+        Classification
       </Typography>
       <Box
         p={2}
-        bgcolor="#f8f8f8"
+        bgcolor="action.hover"
         fontFamily="monospace"
-        fontSize={{ lg: "1.5rem" }}
-        border="1px solid #0000001f"
+        fontSize={{ lg: "1.2rem" }}
+        border="1px solid #46464688"
         borderLeft="3px solid #ff9c34"
       >
-        class MultiTrain.
-        <Typography component="strong" fontWeight="bold" fontSize="inherit">
-          MultiClassifier
-        </Typography>
-        (cores = -1, random_state = randint(1000), verbose = False, target_class
-        = ‘binary’)
+        class MultiTrain.MultiClassifier(cores = -1, random_state =
+        randint(1000), verbose = False, target_class = ‘binary’)
       </Box>
-      <Typography fontSize="1.2rem" mt={2}>
-        A MultiClassifier
+      <Typography variant="h2" mt={2}>
+        The MultiClassifier
       </Typography>
-      <Typography fontSize="1.2rem" my={2}>
-        A MultiClassifier is a combination of several classifier estimators in
-        which each of the estimators is fitted on the training data and a pandas
-        dataframe containing evaluation metrics such as accuracy, balanced
-        accuracy, r2 score, f1 score, precision, recall, roc auc score are
-        reported for each of the models.
+      <Typography my={1}>
+        The MultiClassifier is a combination of many classifier estimators, each
+        of which is fitted on the training data and returns assessment metrics
+        such as accuracy, balanced accuracy, r2 score, f1 score, precision,
+        recall, roc auc score for each of the models.
       </Typography>
-      {/* Parameters */}
 
       <Box component="section">
-        <Typography component="h2" p={3} fontWeight="bold" fontSize="1.3rem">
+        <Typography component="h2" variant="h2" mb={2}>
           Parameters
         </Typography>
-        {/* The column */}
+        <Typography component="ul">
+          <Typography component="li">
+            <Typography fontWeight="bold">cores: int, default=-1</Typography>
+            This parameter is used to specify how many concurrent processes or
+            threads should be used for routines that are parallelized with
+            joblib. <br /> If set to -1, all CPUs are used. <br />
+            If less than-1, (n_cpus + 1 + n_jobs) e.g. -2 means all CPU’s but
+            one are used. The value for cores is set on all classifiers with the
+            n_jobs parameter. <br /> See the{" "}
+            <a href="https://scikit-learn.org/stable/glossary.html#term-n_jobs">
+              scikit-learn documentation for more.
+            </a>
+          </Typography>
+        </Typography>
         <Accordion disableGutters square={false}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography component="span" fontSize="1.1rem">
-              cores: int, default=-1
-            </Typography>
+            <Typography component="span" fontSize="1.1rem"></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
