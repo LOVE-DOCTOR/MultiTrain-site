@@ -1,196 +1,136 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { lightBlue, blueGrey } from "@mui/material/colors";
+import { Box, Typography, Link } from "@mui/material";
+import CodeBlock from "./CodeBlock";
+
 const Multiclassifier = () => {
   return (
-    <Box component="main" px={{ xs: 3, md: 7 }}>
-      <Typography
-        component="h1"
-        fontWeight="bold"
-        fontSize="2rem"
-        textAlign="center"
-        my={2}
-        py={3}
-        bgcolor={lightBlue[50]}
-        sx={{
-          borderTopRightRadius: 32,
-          borderBottomLeftRadius: 32,
-        }}
-      >
-        Multiclassifier
+    <Box component="main" px={{ xs: 3, md: 5 }}>
+      <Typography component="h1" variant="h1" id="classification">
+        Classification
       </Typography>
       <Box
         p={2}
-        bgcolor="#f8f8f8"
+        my={2}
+        bgcolor="action.hover"
         fontFamily="monospace"
-        fontSize={{ lg: "1.5rem" }}
-        border="1px solid #0000001f"
+        fontSize={{ xs: "0.9rem", lg: "1.1rem" }}
+        border="1px solid #46464688"
         borderLeft="3px solid #ff9c34"
       >
-        class MultiTrain.
-        <Typography component="strong" fontWeight="bold" fontSize="inherit">
-          MultiClassifier
-        </Typography>
-        (cores = -1, random_state = randint(1000), verbose = False, target_class
-        = ‘binary’)
+        class MultiTrain.MultiClassifier(cores = -1, random_state =
+        randint(1000), verbose = False, imbalanced = False, sampling = None,
+        strategy = 'auto')
       </Box>
-      <Typography fontSize="1.2rem" mt={2}>
-        A MultiClassifier
+      <Typography variant="h2">MultiClassifier</Typography>
+      <Typography my={1}>
+        The MultiClassifier is a combination of many classifier estimators, each
+        of which is fitted on the training data and returns assessment metrics
+        such as accuracy, balanced accuracy, r2 score, f1 score, precision,
+        recall, roc auc score for each of the models.
       </Typography>
-      <Typography fontSize="1.2rem" my={2}>
-        A MultiClassifier is a combination of several classifier estimators in
-        which each of the estimators is fitted on the training data and a pandas
-        dataframe containing evaluation metrics such as accuracy, balanced
-        accuracy, r2 score, f1 score, precision, recall, roc auc score are
-        reported for each of the models.
-      </Typography>
-      {/* Parameters */}
 
-      <Box component="section">
-        <Typography component="h2" p={3} fontWeight="bold" fontSize="1.3rem">
+      <Box component="section" my={2}>
+        <Typography component="h2" variant="h2">
           Parameters
         </Typography>
-        {/* The column */}
-        <Accordion disableGutters square={false}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography component="span" fontSize="1.1rem">
-              cores: int, default=-1
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              This parameter is used to specify how many concurrent processes or
-              threads should be used for routines that are parallelized with
-              joblib. <br /> If set to -1, all CPUs are used. <br />
-              If less than-1, (n_cpus + 1 + n_jobs) e.g. -2 means all CPU’s but
-              one are used. The value for cores is set on all classifiers with
-              the n_jobs parameter. <br /> See the{" "}
-              <a href="https://scikit-learn.org/stable/glossary.html#term-n_jobs">
-                scikit-learn documentation for more.
-              </a>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        <Box
+          component="ul"
+          ml={{ xs: -2 }}
+          sx={{ "& li": { mt: { xs: 1, md: 2 } } }}
+        >
+          <Typography component="li" id="cores">
+            <Typography fontWeight="bold">cores: int, default=-1</Typography>
+            This parameter is used to specify how many concurrent processes or
+            threads should be used for routines that are parallelized with{" "}
+            <Link
+              href="https://scikit-learn.org/stable/glossary.html#term-joblib"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              joblib
+            </Link>
+            . <br /> If set to -1, all CPUs are used. <br />
+            If less than-1, (n_cpus + 1 + n_jobs) e.g. -2 means all CPU’s but
+            one are used. The value for cores is set on all classifiers with the
+            n_jobs parameter. <br /> See the{" "}
+            <Link
+              href="https://scikit-learn.org/stable/glossary.html#term-n_jobs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              scikit-learn documentation
+            </Link>{" "}
+            for more.
+          </Typography>
 
-        <Accordion disableGutters>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography component="span" fontSize="1.1rem">
+          <Typography component="li" id="random_state">
+            <Typography fontWeight="bold">
               random_state: int, default=randint(1000)
             </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Unless specified, a random number between 0 and 1000 is set on the
-              random_state parameter on all estimators in the MultiClassifier.{" "}
-              <br /> See the{" "}
-              <a href="https://scikit-learn.org/stable/glossary.html#term-random_state">
-                scikit-learn documentation for more.
-              </a>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+            Unless specified, a random number between 0 and 1000 is set on the
+            random_state parameter on all estimators in the MultiClassifier.{" "}
+            <br /> See the{" "}
+            <Link
+              href="https://scikit-learn.org/stable/glossary.html#term-random_state"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              scikit-learn documentation
+            </Link>{" "}
+            for more.
+          </Typography>
 
-        <Accordion disableGutters>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography component="span" fontSize="1.1rem">
+          <Typography component="li" id="verbose">
+            <Typography fontWeight="bold">
               verbose: bool, default = False
             </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              If verbose is set to True, when the fit function is called, the
-              name of the estimator currently being fitted on the training set
-              is displayed in your notebook.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+            If verbose is set to True, when the fit function is called, the name
+            of the estimator currently being fitted on the training set is
+            displayed in your notebook.
+          </Typography>
 
-        <Accordion disableGutters>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel4a-content"
-            id="panel4a-header"
-          >
-            <Typography component="span" fontSize="1.1rem">
+          <Typography component="li" id="target_class">
+            <Typography fontWeight="bold">
               target_class: ['binary', ‘multiclass'] , default = 'binary'
             </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              This indicates the type of classification problem you're trying to
-              solve. If multiclass, set to 'multiclass' to avoid throwing an
-              error as multiclass training is slightly different from binary.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+            This indicates the type of classification problem you're trying to
+            solve. If multiclass, set to 'multiclass' to avoid throwing an error
+            as multiclass training is slightly different from binary.
+          </Typography>
 
-        <Accordion disableGutters>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel5a-content"
-            id="panel5a-header"
-          >
-            <Typography component="span" fontSize="1.1rem">
+          <Typography component="li" id="imbalanced">
+            <Typography fontWeight="bold">
               imbalanced: bool, default = False
             </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Set to True if you’re working with an imbalanced classification
-              dataset.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+            Set to True if you’re working with an imbalanced classification
+            dataset.
+          </Typography>
 
-        <Accordion disableGutters square={false}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel6a-content"
-            id="panel6a-header"
-          >
-            <Typography component="span" fontSize="1.1rem">
+          <Typography component="li" id="strategy">
+            <Typography fontWeight="bold">
               strategy: str, default = None
             </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography component="div">
-              Set your desired sampling strategy, whether oversampling,
-              undersampling, or over and undersampling.
-              <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
-                from MultiTrain import MultiClassifier
-                <br /> train = MultiClassifier() <br /> train.strategies()
-              </Box>
-              Use the above code example to view a list of the different
-              strategies you can set to this parameter. This parameter can only
-              be used when imbalanced is set to True.
-              <Box p={2} my={2} bgcolor="#f8f8f8" fontFamily="monospace">
-                from MultiTrain import MultiClassifier
-                <br /> train = MultiClassifier(cores=-1, random_state = 42,
-                verbose = True, target_class='binary', imbalanced=True,
-                strategy='SMOTE')
-              </Box>
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+            Set your desired sampling strategy, whether oversampling,
+            undersampling, or over and undersampling.
+            <CodeBlock
+              code={`from MultiTrain import MultiClassifier
+train = MultiClassifier()
+train.strategies()`}
+            />
+            Use the above code example to view a list of the different
+            strategies you can set to this parameter. This parameter can only be
+            used when imbalanced is set to True.
+            <CodeBlock
+              code={`from MultiTrain import MultiClassifier
+train = MultiClassifier (cores=-1,
+                         random_state = 42,
+                         verbose = True,
+                        target_class='binary',
+                        imbalanced=True,
+                        strategy='SMOTE')`}
+            />
+          </Typography>
+        </Box>
       </Box>
       {/* End of Parameters */}
 
