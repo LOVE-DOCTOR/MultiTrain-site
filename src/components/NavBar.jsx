@@ -16,8 +16,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -98,12 +98,11 @@ const NavBar = () => {
     </Box>
   );
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+    <Box sx={{ flexGrow: 1, mb: { xs: 8, md: 12 } }}>
+      <AppBar id="nav" position="fixed">
         <Toolbar>
           <IconButton
             onClick={handleDrawerToggle}
-            size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
@@ -129,14 +128,14 @@ const NavBar = () => {
             {theme.palette.mode} mode
           </Typography>
           <IconButton
-            sx={{ ml: 1 }}
+            aria-label="toggle theme"
             onClick={colorMode.toggleColorMode}
             color="inherit"
           >
             {theme.palette.mode === "dark" ? (
               <Brightness7Icon />
             ) : (
-              <Brightness4Icon />
+              <LightbulbIcon />
             )}
           </IconButton>
           <Search>
