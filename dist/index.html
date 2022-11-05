@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MultiTrain</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <p style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+        <img
+          src="https://img.shields.io/pypi/v/MultiTrain?label=pypi%20package"
+          alt="PyPI"
+        /><br />
+        <img
+          src="https://img.shields.io/github/languages/top/LOVE-DOCTOR/train-with-models"
+          alt="Languages"
+        /><br />
+        <img
+          src="https://img.shields.io/github/repo-size/LOVE-DOCTOR/train-with-models"
+          alt="GitHub repo size"
+        /><br />
+        <img
+          src="https://img.shields.io/github/license/LOVE-DOCTOR/train-with-models"
+          alt="GitHub"
+        /><br />
+        <img
+          src="https://img.shields.io/github/stars/love-doctor/train-with-models"
+          alt="GitHub Repo stars"
+        /><br />
+        <img
+          src="https://img.shields.io/github/contributors/love-doctor/train-with-models"
+          alt="GitHub contributors"
+        /><br />
+        <a href="https://pepy.tech/project/multitrain"
+          ><img src="https://pepy.tech/badge/multitrain" alt="Downloads" /></a
+        ><br />
+        <a
+          href="https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue"
+          ><img
+            src="https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue"
+            alt="python version" /></a
+        ><br />
+        <img
+          src="https://img.shields.io/badge/Windows-0078D6?&logo=windows&logoColor=white"
+          alt="Windows"
+        /><br />
+        <img
+          src="https://img.shields.io/badge/Ubuntu-E95420?&logo=ubuntu&logoColor=white"
+          alt="Ubuntu"
+        /><br />
+        <img
+          src="https://img.shields.io/badge/mac%20os-0078D6?&logo=macos&logoColor=white"
+          alt="macOS"
+        />
+      </p>
+      <h1 id="contributing">CONTRIBUTING</h1>
+      <p>
+        If you wish to make small changes to the codebase, your pull requests
+        are welcome. However, for major changes or ideas on how to improve the
+        library, please create an issue.
+      </p>
+      <h1 id="links">LINKS</h1>
+      <ul>
+        <li><a href="#multitrain">MultiTrain</a></li>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#issues">Issues</a></li>
+        <li>
+          <a href="#usage">Usage</a>
+          <ol>
+            <li>
+              <a href="#visualize-training-results"
+                >Visualize training results</a
+              >
+            </li>
+            <li><a href="#hyperparameter-tuning">Hyperparameter Tuning</a></li>
+          </ol>
+          <ul>
+            <li>
+              <a href="#multiclassifier">MultiClassifier(Classification)</a>
+            </li>
+          </ul>
+          <ol>
+            <li>
+              <a href="#classifier-model-names">Classifier Model Names</a>
+            </li>
+            <li><a href="#split-classifier">Split</a></li>
+            <li><a href="#fit-classifier">Fit</a></li>
+          </ol>
+          <ul>
+            <li><a href="#multiregressor">MultiRegressor</a></li>
+          </ul>
+          <ol>
+            <li>
+              <a href="#regression-model-names">Regression Model Names</a>
+            </li>
+            <li><a href="#split-regression">Split</a></li>
+            <li><a href="#fit-regression">Fit</a></li>
+          </ol>
+        </li>
+      </ul>
+      <h1 id="multitrain">MultiTrain</h1>
+      <p>
+        MultiTrain is a python module for machine learning, built with the aim
+        of assisting you to find the machine learning model that works best on a
+        particular dataset.
+      </p>
+      <h1 id="requirements">REQUIREMENTS</h1>
+      <p>MultiTrain requires:</p>
+      <ul>
+        <li>matplotlib==3.5.3</li>
+        <li>numpy==1.23.3</li>
+        <li>pandas==1.4.4</li>
+        <li>plotly==5.10.0</li>
+        <li>scikit-learn==1.1.2</li>
+        <li>xgboost==1.6.2</li>
+        <li>catboost==1.0.6</li>
+        <li>imbalanced-learn==0.9.1</li>
+        <li>seaborn==0.12.0</li>
+        <li>lightgbm==3.3.2</li>
+        <li>scikit-optimize==0.9.0</li>
+      </ul>
+      <h1 id="installation">INSTALLATION</h1>
+      <p>Install MultiTrain using:</p>
+      <pre><code class="hljs commandline language-commandline">pip <span class="hljs-keyword">install</span> MultiTrain</code></pre>
+      <h1 id="issues">ISSUES</h1>
+      <p>
+        If you experience issues or come across a bug while using MultiTrain,
+        make sure to update to the latest version with
+      </p>
+      <pre><code class="hljs commandline language-commandline">pip install <span class="hljs-comment">--upgrade MultiTrain</span></code></pre>
+      <p>If that doesn't fix your bug, create an issue in the issue tracker</p>
+      <h1 id="usage">USAGE</h1>
+      <h3 id="multiclassifier">MULTICLASSIFIER</h3>
+      <p>
+        The MultiClassifier is a combination of many classifier estimators, each
+        of which is fitted on the training data and returns assessment metrics
+        such as accuracy, balanced accuracy, r2 score,<br />
+        f1 score, precision, recall, roc auc score for each of the models.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-comment">#This is a code snippet of how to import the MultiClassifier and the parameters contained in an instance</span>
+
+<span class="hljs-comment">#Note: the parameter target_class was removed in version 0.11.0, your dataset is automatically checked</span>
+<span class="hljs-comment">#      for binary labels or multiclass labels</span>
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+train = MultiClassifier(cores=-<span class="hljs-number">1</span>, <span class="hljs-comment">#this parameter works exactly the same as setting n_jobs to -1, this uses all the cpu cores to make training faster</span>
+                        random_state=<span class="hljs-number">42</span>, <span class="hljs-comment">#setting random state here automatically sets a unified random state across function imports</span>
+                        verbose=<span class="hljs-literal">True</span>, <span class="hljs-comment">#set this to True to display the name of the estimators being fitted at a particular time</span>
+                        imbalanced=<span class="hljs-literal">True</span>, <span class="hljs-comment">#set this parameter to true if you are working with an imbalanced dataset</span>
+                        sampling=<span class="hljs-string">&#x27;SMOTE&#x27;</span>, <span class="hljs-comment">#set this parameter to any over_sampling, under_sampling or over_under_sampling methods if imbalanced is True</span>
+                        strategy=<span class="hljs-string">&#x27;auto&#x27;</span>, <span class="hljs-comment">#not all samplers use this parameters, the parameter is named as sampling_strategy for the samplers that support,</span>
+                                        <span class="hljs-comment">#read more in the imbalanced learn documentation before using this parameter</span>
+                        select_models=[<span class="hljs-string">&#x27;LogisticRegression&#x27;</span>, <span class="hljs-string">&#x27;DecisionTreeClassifier&#x27;</span>] <span class="hljs-comment">#only use this parameter if you want to select your custom models for training</span>
+                        )</code></pre>
+      <p>
+        In continuation of the code snippet above, if you're unsure about the
+        various sampling techniques accessible after setting imbalanced to True
+        when working on an imbalanced dataset,<br />
+        a code snippet is provided below to generate a list of all available
+        sampling techniques.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+train = MultiClassifier()
+<span class="hljs-built_in">print</span>(train.strategies()) <span class="hljs-comment">#this line of codes returns all the under sampling, over sampling and over_under sampling methods available for use</span></code></pre>
+      <h3 id="classifier-model-names">CLASSIFIER MODEL NAMES</h3>
+      <p>To return a list of all models available for training</p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+train = MultiClassifier()
+<span class="hljs-built_in">print</span>(train.classifier_model_names())</code></pre>
+      <h3 id="split-classifier">SPLIT CLASSIFIER</h3>
+      <p>
+        This function operates identically like the scikit-learn framework's
+        train test split function.<br />
+        However, it has some extra features.<br />
+        For example, the split method is demonstrated in the code below.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+
+train = MultiClassifier()
+df = pd.read_csv(<span class="hljs-string">&quot;nameofFile.csv&quot;</span>)
+
+features = df.drop(<span class="hljs-string">&quot;nameOflabelcolumn&quot;</span>, axis = <span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&quot;nameOflabelcolumn&quot;</span>]
+
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.3</span>,
+                    randomState=<span class="hljs-number">42</span>)</code></pre>
+      <p>
+        If you want to run Principal Component Analysis on your dataset to
+        reduce its dimensionality,<br />
+        You can achieve this with the split function. See the code excerpt
+        below.
+      </p>
+      <h4 id="dimensionality-reduction">Dimensionality Reduction</h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier <span class="hljs-comment">#import the module</span>
+
+train = MultiClassifier()
+df = pd.read_csv(<span class="hljs-string">&#x27;NameOfFile.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&quot;nameOfLabelColumn&quot;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;nameOfLabelColumn&#x27;</span>]
+pretend_columns = [<span class="hljs-string">&#x27;columnA&#x27;</span>, <span class="hljs-string">&#x27;columnB&#x27;</span>, <span class="hljs-string">&#x27;columnC&#x27;</span>]
+
+<span class="hljs-comment">#It&#x27;s important to note that when using the split function, it must be assigned to a variable as it returns values.</span>
+split = train.split(X=features, <span class="hljs-comment">#the features of the dataset</span>
+                    y=labels,   <span class="hljs-comment">#the labels of the dataset</span>
+                    sizeOfTest=<span class="hljs-number">0.2</span>, <span class="hljs-comment">#same as test_size parameter in train_test_split</span>
+                    randomState=<span class="hljs-number">42</span>, <span class="hljs-comment">#initialize the value of the random state parameter</span>
+                    dimensionality_reduction=<span class="hljs-literal">True</span>, <span class="hljs-comment">#setting to True enables this function to perform PCA on both X_train and X_test automatically after splitting</span>
+                    normalize=<span class="hljs-string">&#x27;StandardScaler&#x27;</span>, <span class="hljs-comment">#when using dimensionality_reduction, this must be set to one of StandardScaler,MinMaxScaler or RobustScaler if feature columns aren&#x27;t scaled before a split</span>
+                    n_components=<span class="hljs-number">2</span>, <span class="hljs-comment">#when using dimensionality_reduction, this parameter must be set to define the number of components to keep.</span>
+                    columns_to_scale=pretend_columns <span class="hljs-comment">#pass in a list of the columns in your dataset that you wish to scale</span>
+                    )</code></pre>
+      <p>
+        You can also encode your categorical columns with the split function
+      </p>
+      <h4 id="categorical-encoding">Categorical encoding</h4>
+      <p>
+        It is important to remember that the keys are preset when using the
+        dictionaries in the encode parameter and cannot be modified without
+        causing an error.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-comment"># continuation from example code above</span>
+
+<span class="hljs-comment"># if you want to automatically apply label encoder to all categorical columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    encode=<span class="hljs-string">&#x27;labelencoder&#x27;</span>
+                    )
+
+<span class="hljs-comment"># if you want to automatically apply one hot encoder to all categorical columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    encode=<span class="hljs-string">&#x27;onehotencoder&#x27;</span>
+                    )
+<span class="hljs-comment"># there can also be scenarios whereby you only want to apply the labelencoder on</span>
+<span class="hljs-comment"># selected columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    encode={<span class="hljs-string">&#x27;labelencoder&#x27;</span>:[<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-string">&#x27;column&#x27;</span>, <span class="hljs-string">&#x27;names&#x27;</span>]}
+                    )
+
+<span class="hljs-comment"># if you want to apply onehot encoder on selected columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    encode={<span class="hljs-string">&#x27;onehotencoder&#x27;</span>: [<span class="hljs-string">&#x27;the&#x27;</span>, <span class="hljs-string">&#x27;column&#x27;</span>, <span class="hljs-string">&#x27;names&#x27;</span>]}
+                    )
+
+<span class="hljs-comment"># you can also use both label and onehotencoder together</span>
+<span class="hljs-comment"># this is used when there are columns you want to label encode</span>
+<span class="hljs-comment"># and columns you want to onehotencode in the same dataset</span>
+columns_to_encode = {<span class="hljs-string">&#x27;labelencoder&#x27;</span>: [<span class="hljs-string">&#x27;column1&#x27;</span>, <span class="hljs-string">&#x27;column2&#x27;</span>, <span class="hljs-string">&#x27;column3&#x27;</span>],
+                     <span class="hljs-string">&#x27;onehotencoder&#x27;</span>: [<span class="hljs-string">&#x27;column4&#x27;</span>, <span class="hljs-string">&#x27;column5&#x27;</span>, <span class="hljs-string">&#x27;column6&#x27;</span>]}
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    encode=columns_to_encode
+                    )</code></pre>
+      <h4 id="filling-missing-values">Filling missing values</h4>
+      <p>
+        With the help of the "missing values" argument, you may quickly fill in
+        missing values.
+      </p>
+      <p>
+        You would need to supply a dictionary to the argument in order to fill
+        in the missing values. Each preset key in the dictionary must be used as
+        shown in the example below.
+      </p>
+      <p>
+        It's important to remember that the categorical columns are represented
+        by the key "cat" and their corresponding value is the method for filling
+        all of the categorical columns.<br />
+        The method to fill all numerical columns is represented by the key
+        "num," which stands in for all numerical columns.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-comment"># the three strategies available to fill missing values are [&#x27;most_frequent&#x27;, &#x27;mean&#x27;, &#x27;median&#x27;]</span>
+
+<span class="hljs-comment"># only fill categorical columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    missing_values={<span class="hljs-string">&#x27;cat&#x27;</span>: <span class="hljs-string">&#x27;most_frequent&#x27;</span>}
+                    )
+
+<span class="hljs-comment"># only fill numerical columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    missing_values={<span class="hljs-string">&#x27;num&#x27;</span>: <span class="hljs-string">&#x27;mean&#x27;</span>}
+                    )
+
+<span class="hljs-comment"># fill both categorical and numerical columns</span>
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    missing_values={<span class="hljs-string">&#x27;cat&#x27;</span>: <span class="hljs-string">&#x27;most_frequent&#x27;</span>, <span class="hljs-string">&#x27;num&#x27;</span>: <span class="hljs-string">&#x27;most_frequent&#x27;</span>}
+                    )</code></pre>
+      <h3 id="fit-classifier">FIT CLASSIFIER</h3>
+      <p>
+        Now that the dataset has been split using the split method, it is time
+        to train on it using the fit method.<br />
+        Instead of the standard training in scikit-learn, catboost, or xgboost,
+        this fit method integrates almost all available machine learning
+        algorithms and trains them all on the dataset.<br />
+        It then returns a pandas dataframe including information such as which
+        algorithm is overfitting, which algorithm has the greatest accuracy, and
+        so on. A basic code example for using the fit function is shown below.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+
+train = MultiClassifier()
+df = pd.read_csv(<span class="hljs-string">&#x27;file.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&quot;nameOflabelcolumn&quot;</span>, axis = <span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&quot;nameOflabelcolumn&quot;</span>]
+
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.3</span>,
+                    randomState=<span class="hljs-number">42</span>,
+                    strat=<span class="hljs-literal">True</span>,
+                    shuffle_data=<span class="hljs-literal">True</span>)
+
+fit = train.fit(splitting=<span class="hljs-literal">True</span>,
+                split_data=split)</code></pre>
+      <p>
+        Now, we would be looking at the various ways the fit method can be
+        implemented.
+      </p>
+      <h4
+        id="if-you-used-the-traditional-train_test_split-method-available-in-scikit-learn"
+      >
+        If you used the traditional train_test_split method available in
+        scikit-learn
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+train = MultiClassifier()
+
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;labelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+fit = train.fit(X_train=X_train,
+              X_test=X_test,
+              y_train=y_train,
+              y_test=y_test,
+              split_self=<span class="hljs-literal">True</span>, <span class="hljs-comment">#always set this to true if you used the traditional train_test_split</span>
+              show_train_score=<span class="hljs-literal">True</span>, <span class="hljs-comment">#only set this to true if you want to compare train equivalent of all the metrics shown on the dataframe</span>
+              return_best_model=<span class="hljs-string">&#x27;Accuracy&#x27;</span>, <span class="hljs-comment">#Set a metric here to sort the resulting dataframe by the best performing model based on the metric</span>
+              excel=<span class="hljs-literal">True</span> <span class="hljs-comment">#when this parameter is set to true, an spreadsheet report of the training is stored in your current working directory</span>
+              )</code></pre>
+      <h4 id="if-you-used-the-split-method-provided-by-the-multiclassifier">
+        If you used the split method provided by the MultiClassifier
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+
+train = MultiClassifier()
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;labelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    randomState=<span class="hljs-number">42</span>,
+                    shuffle_data=<span class="hljs-literal">True</span>)
+
+fit = train.fit(splitting=<span class="hljs-literal">True</span>,
+                split_data=split,
+                show_train_score=<span class="hljs-literal">True</span>,
+                excel=<span class="hljs-literal">True</span>)</code></pre>
+      <h4 id="if-you-want-to-train-on-your-dataset-with-kfold">
+        If you want to train on your dataset with KFold
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+
+train = MultiClassifier()
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;labelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+fit = train.fit(X=features,
+                y=labels,
+                kf=<span class="hljs-literal">True</span>, <span class="hljs-comment">#set this to true if you want to train on your dataset with KFold</span>
+                fold=<span class="hljs-number">5</span>, <span class="hljs-comment">#you can adjust this to use any number of folds you want for kfold, higher numbers leads to higher training times</span>
+                show_train_score=<span class="hljs-literal">True</span>,
+                excel=<span class="hljs-literal">True</span>)</code></pre>
+      <h4 id="if-youre-working-on-an-nlp-problem">
+        If you're working on an NLP problem
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+
+train = MultiClassifier()
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;LabelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+data_split = train.split(X=features,
+                         y=labels,
+                         sizeOfTest=<span class="hljs-number">0.2</span>,
+                         randomState=<span class="hljs-number">42</span>)
+
+fit = train.fit(splitting=<span class="hljs-literal">True</span>,
+                split_data=data_split,
+                show_train_score=<span class="hljs-literal">True</span>,
+                excel=<span class="hljs-literal">True</span>,
+                text=<span class="hljs-literal">True</span>, <span class="hljs-comment">#setting text to True lets the method know you&#x27;re working on NLP</span>
+                vectorizer=<span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-comment">#set this to one of &#x27;count&#x27; or &#x27;tfidf&#x27; when text is True</span>
+                ngrams=(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>) <span class="hljs-comment">#this defines the sequence of N words</span>
+ )</code></pre>
+      <h3 id="use-best-model">USE BEST MODEL</h3>
+      <p>
+        After training on your dataset, it is only normal that you'd want to
+        make use of the best algorithm based on a specific metric.<br />
+        A method is also provided for you to do this easily.<br />
+        Continuing from any of the code snippets above(for the fit method) -
+        after training, to use the best algorithm based on it's name
+      </p>
+      <pre><code class="hljs python language-python">mod=train.use_model(df=fit, model=<span class="hljs-string">&#x27;LogisticRegression&#x27;</span>)</code></pre>
+      <p>
+        Or else if you want to automatically select the best algorithm based on
+        a particular metric of your choice
+      </p>
+      <pre><code class="hljs python language-python">mod=train.use_model(df=fit, best=<span class="hljs-string">&#x27;Balanced Accuracy&#x27;</span>)</code></pre>
+      <h3 id="visualize-training-results">VISUALIZE TRAINING RESULTS</h3>
+      <p>
+        It gets interesting. After model training, it is obvious that you get a
+        dataframe containing all algorithms and their performance.<br />
+        What if you could visualize this dataframe instead and even save all the
+        plots to your directory?<br />
+        Check the code snippet below to see how
+      </p>
+      <p>
+        Note: In order to visualize your model training results, you must have
+        passed the fit method into a variable.
+      </p>
+      <h4 id="if-you-want-to-visualize-the-plots-with-matplotlib">
+        If you want to visualize the plots with matplotlib
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-comment">#this code is a continuation of the implementations of the fit method above</span>
+
+<span class="hljs-comment">#if you only want to visualize the results in your notebook, use this code</span>
+train.visualize(param=fit, <span class="hljs-comment">#this parameter takes in the dataframe of the training results</span>
+                y=labels,
+                t_split=<span class="hljs-literal">True</span>, <span class="hljs-comment">#set t_split to true here if you split your data with the split method provided by MultiTrain</span>
+                kf=<span class="hljs-literal">False</span>, <span class="hljs-comment">#set kf to True here if you used KFold split to train, note t_split and kf can&#x27;t be set to True at the same time</span>
+                size=(<span class="hljs-number">15</span>,<span class="hljs-number">8</span>) <span class="hljs-comment">#this sets the size of each plots to be displayed in your notebook</span>
+                )
+
+<span class="hljs-comment">#if you want to visualize the results in your notebook and save the plots to your system</span>
+train.visualize(param=fit,
+                y=labels,
+                t_split=<span class="hljs-literal">True</span>,
+                size=(<span class="hljs-number">15</span>,<span class="hljs-number">8</span>),
+                file_path=<span class="hljs-string">&#x27;C:/Users/lenovo/&#x27;</span>, <span class="hljs-comment">#you can set your own filepath here)</span>
+                save=<span class="hljs-string">&#x27;png&#x27;</span>, <span class="hljs-comment">#you can choose to set this parameter to either &#x27;png&#x27; or &#x27;pdf&#x27;</span>
+                save_name=<span class="hljs-string">&#x27;dir1&#x27;</span>
+                )
+
+<span class="hljs-comment"># the value set to save_name becomes the name of the pdf file if you set save=&#x27;pdf&#x27;</span>
+<span class="hljs-comment"># the value set to save_name becomes the name of a folder created to accommodate the png file if you set save=&#x27;png&#x27;</span></code></pre>
+      <h4 id="if-you-want-to-visualize-the-plots-with-plotly">
+        If you want to visualize the plots with plotly
+      </h4>
+      <p>
+        Plotly unlike matplotlib provides you with interactive plots. The code
+        syntax is exactly the same with the visualize function.<br />
+        The only exception is that you need to use train.show() instead of
+        train.visualize()
+      </p>
+      <h3 id="hyperparameter-tuning">HYPERPARAMETER TUNING</h3>
+      <p>
+        After training the MultiClassifier on your dataset and you have selected
+        a model you wish to work with, you can perform hyperparameter tuning<br />
+        on such model.<br />
+        All parameters available to use
+      </p>
+      <pre><code class="hljs python language-python">tune_parameters(self,
+                model: <span class="hljs-built_in">str</span> = <span class="hljs-literal">None</span>,
+                parameters: <span class="hljs-built_in">dict</span> = <span class="hljs-literal">None</span>,
+                tune: <span class="hljs-built_in">str</span> = <span class="hljs-literal">None</span>,
+                use_cpu: <span class="hljs-built_in">int</span> = <span class="hljs-literal">None</span>,
+                cv: <span class="hljs-built_in">int</span> = <span class="hljs-number">5</span>,
+                n_iter: <span class="hljs-built_in">any</span> = <span class="hljs-number">50</span>,
+                return_train_score: <span class="hljs-built_in">bool</span> = <span class="hljs-literal">False</span>,
+                refit: <span class="hljs-built_in">bool</span> = <span class="hljs-literal">True</span>,
+                random_state: <span class="hljs-built_in">int</span> = <span class="hljs-literal">None</span>,
+                factor: <span class="hljs-built_in">int</span> = <span class="hljs-number">3</span>,
+                verbose: <span class="hljs-built_in">int</span> = <span class="hljs-number">4</span>,
+                resource: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;n_samples&quot;</span>,
+                max_resources: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;auto&quot;</span>,
+                min_resources_grid: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;exhaust&quot;</span>,
+                min_resources_rand: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;smallest&quot;</span>,
+                aggressive_elimination: <span class="hljs-built_in">any</span> = <span class="hljs-literal">False</span>,
+                error_score: <span class="hljs-built_in">any</span> = np.nan,
+                pre_dispatch: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;2*n_jobs&quot;</span>,
+                optimizer_kwargs: <span class="hljs-built_in">any</span> = <span class="hljs-literal">None</span>,
+                fit_params: <span class="hljs-built_in">any</span> = <span class="hljs-literal">None</span>,
+                n_points: <span class="hljs-built_in">any</span> = <span class="hljs-number">1</span>,
+                score=<span class="hljs-string">&#x27;accuracy&#x27;</span>)</code></pre>
+      <p>
+        The different hyper parameter tuning methods available are listed below
+      </p>
+      <pre><code class="hljs text language-text">1. GridSearchCV represented with &#x27;grid&#x27;
+2. RandomizedSearchCV represented with &#x27;random&#x27;
+3. BayesSearchCV represented with &#x27;bayes&#x27;
+4. HalvingGridSearchCV represented with &#x27;half-grid&#x27;
+5. HalvingRandomizedSearchCV represented with &#x27;half-random&#x27;</code></pre>
+      <p>
+        Let's train a new model and then perform hyperparameter tuning on it.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiClassifier
+
+df = pd.read_csv(<span class="hljs-string">&#x27;data.csv&#x27;</span>)
+features = df.drop(<span class="hljs-string">&#x27;thelabels&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;thelabels&#x27;</span>]
+
+train = MultiClassifier(random_state=<span class="hljs-number">42</span>,
+                        verbose=<span class="hljs-literal">True</span>)
+
+fit = train.fit(X=features,
+                y=labels,
+                kf=<span class="hljs-literal">True</span>,
+                fold=<span class="hljs-number">5</span>)
+
+mod = train.use_best_model(df=fit, best=<span class="hljs-string">&#x27;Balanced Accuracy&#x27;</span>)
+
+param = {<span class="hljs-string">&#x27;random_state&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]} <span class="hljs-comment">#remember to set your own parameters here</span>
+
+<span class="hljs-comment">#using grid search</span>
+tuned_model_grid = train.tune_parameters(model=mod,
+                                    parameters=param,
+                                    use_cpu=-<span class="hljs-number">1</span>, <span class="hljs-comment">#uses all cores of the cpu</span>
+                                    tune=<span class="hljs-string">&#x27;grid&#x27;</span>,
+                                    cv=<span class="hljs-number">5</span>)
+
+<span class="hljs-comment">#using random search</span>
+tuned_model_random = train.tune_parameters(model=mod,
+                                           parameters=param,
+                                           use_cpu=-<span class="hljs-number">1</span>, <span class="hljs-comment">#uses all cores of the cpu</span>
+                                           tune=<span class="hljs-string">&#x27;random&#x27;</span>,
+                                           cv=<span class="hljs-number">5</span>)</code></pre>
+      <p>
+        Notice how you only had to had to change the value of tune to use
+        another hyperparameter tuning algorithm. That's the simplicity
+        MultiTrain provides you.
+      </p>
+      <h2 id="multiregressor">MULTIREGRESSOR</h2>
+      <p>
+        The MultiRegressor is a combination of many classifier estimators, each
+        of which is fitted on the training data and returns assessment metrics
+        for each of the models.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-comment">#This is a code snippet of how to import the MultiClassifier and the parameters contained in an instance</span>
+
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiRegressor
+train = MultiRegressor(cores=-<span class="hljs-number">1</span>, <span class="hljs-comment">#this parameter works exactly the same as setting n_jobs to -1, this uses all the cpu cores to make training faster</span>
+                       random_state=<span class="hljs-number">42</span>, <span class="hljs-comment">#setting random state here automatically sets a unified random state across function imports</span>
+                       verbose=<span class="hljs-literal">True</span> <span class="hljs-comment">#set this to True to display the name of the estimators being fitted at a particular time</span>
+                      )</code></pre>
+      <h3 id="regression-model-names">REGRESSION MODEL NAMES</h3>
+      <p>To return a list of all models available for training</p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiRegressor
+train = MultiRegressor()
+<span class="hljs-built_in">print</span>(train.regression_model_names())</code></pre>
+      <h3 id="split-regression">SPLIT REGRESSION</h3>
+      <p>
+        This function operates identically like the scikit-learn framework's
+        train test split function.<br />
+        However, it has some extra features.<br />
+        For example, the split method is demonstrated in the code below.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiRegressor
+train = MultiRegressor()
+df = pd.read_csv(<span class="hljs-string">&quot;FileName.csv&quot;</span>)
+X = df.drop(<span class="hljs-string">&quot;LabelColumn&quot;</span>, axis = <span class="hljs-number">1</span>)
+y = df[<span class="hljs-string">&quot;LabelColumn&quot;</span>]
+split = train.split(X=X,
+                    y=y,
+                    sizeofTest=<span class="hljs-number">0.3</span>,
+                    random_state = <span class="hljs-number">42</span>,
+                    strat = <span class="hljs-literal">True</span>,
+                    shuffle_data=<span class="hljs-literal">True</span>)</code></pre>
+      <p>
+        If you also want to perform dimensionality reduction using the split
+        function, refer to this link
+      </p>
+      <blockquote>
+        <p><a href="#dimensionality-reduction">Dimensionality reduction</a></p>
+      </blockquote>
+      <p>If you want to fill missing values using the split function</p>
+      <blockquote>
+        <p><a href="#filling-missing-values">Fill missing values</a></p>
+      </blockquote>
+      <p>
+        If you want to encode your categorical columns using the split function
+      </p>
+      <blockquote>
+        <p>[Encode categorical columns](#categorical encoding)</p>
+      </blockquote>
+      <p>
+        All you need to do is swap out MultiClassifier with MultiRegressor and
+        you're good to go.
+      </p>
+      <h3 id="fit-regression">FIT REGRESSION</h3>
+      <p>
+        Now, we would be looking at the various ways the fit method can be
+        implemented.
+      </p>
+      <h4
+        id="if-you-used-the-traditional-train_test_split-method-available-in-scikit-learn-1"
+      >
+        If you used the traditional train_test_split method available in
+        scikit-learn
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiRegressor
+train = MultiRegressor()
+
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;labelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+fit = train.fit(X_train=X_train,
+                X_test=X_test,
+                y_train=y_train,
+                y_test=y_test,
+                split_self=<span class="hljs-literal">True</span>, <span class="hljs-comment">#always set this to true if you used the traditional train_test_split</span>
+                show_train_score=<span class="hljs-literal">True</span>, <span class="hljs-comment">#only set this to true if you want to compare train equivalent of all the metrics shown on the dataframe</span>
+                return_best_model=<span class="hljs-literal">None</span>, <span class="hljs-comment">#Set a metric here to sort the resulting dataframe by the best performing model based on the metric</span>
+                excel=<span class="hljs-literal">True</span> <span class="hljs-comment">#when this parameter is set to true, an spreadsheet report of the training is stored in your current working directory</span>
+              )</code></pre>
+      <h4 id="if-you-used-the-split-method-provided-by-the-multiregressor">
+        If you used the split method provided by the MultiRegressor
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiRegressor
+
+train = MultiRegressor()
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;labelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+split = train.split(X=features,
+                    y=labels,
+                    sizeOfTest=<span class="hljs-number">0.2</span>,
+                    randomState=<span class="hljs-number">42</span>,
+                    shuffle_data=<span class="hljs-literal">True</span>)
+
+fit = train.fit(splitting=<span class="hljs-literal">True</span>,
+                split_data=split,
+                show_train_score=<span class="hljs-literal">True</span>,
+                excel=<span class="hljs-literal">True</span>)</code></pre>
+      <h4 id="if-you-want-to-train-on-your-dataset-with-kfold-1">
+        If you want to train on your dataset with KFold
+      </h4>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> MultiTrain <span class="hljs-keyword">import</span> MultiRegressor
+
+train = MultiRegressor()
+df = pd.read_csv(<span class="hljs-string">&#x27;filename.csv&#x27;</span>)
+
+features = df.drop(<span class="hljs-string">&#x27;labelName&#x27;</span>, axis=<span class="hljs-number">1</span>)
+labels = df[<span class="hljs-string">&#x27;labelName&#x27;</span>]
+
+fit = train.fit(X=features,
+                y=labels,
+                kf=<span class="hljs-literal">True</span>, <span class="hljs-comment">#set this to true if you want to train on your dataset with KFold</span>
+                fold=<span class="hljs-number">5</span>, <span class="hljs-comment">#you can adjust this to use any number of folds you want for kfold, higher numbers leads to higher training times</span>
+                show_train_score=<span class="hljs-literal">True</span>,
+                excel=<span class="hljs-literal">True</span>)</code></pre>
+    </main>
+  </body>
+</html>
